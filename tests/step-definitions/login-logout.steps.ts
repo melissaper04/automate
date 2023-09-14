@@ -1,11 +1,11 @@
-
 const { Given, When, Then } = require('@cucumber/cucumber')
-const { classLogin } = require('../page-object/Navigation/login-logout')
+const { Login } = require('../page-objects/portal-login-logout/login-logout')
 
-const login = new classLogin()
-Given('I can successufully access the propery market portal using {string}', async (URL) => {
+const login = new Login()
+
+Given('I can successufully access the propery market portal using {string}', async function (url)  {
   //open link in tab
-  await login.open(URL)
+  await login.open(url)
 });
 
 // When('lets login with {string} and {string}', async (username, password) => {
