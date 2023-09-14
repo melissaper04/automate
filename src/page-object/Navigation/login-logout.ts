@@ -1,5 +1,5 @@
 // Class representing the CareerPortal page object
-class loginLogout {
+class classLogin {
 
     constructor() {
       // CSS selectors for elements on the CareerPortal page
@@ -37,5 +37,5 @@ class loginLogout {
   
   // Export the CareerPortal class for use in other modules
   module.exports = {
-    loginLogout
+    classLogin
   };
