@@ -1,11 +1,11 @@
-import { page } from '../../features/support/hooks';
+import {page} from '../../features/support/hooks'
 export class Login {
 
       // loginButtonSelector = 'button[data-type="login"]';
     //   this.email = '#ctl00_ctl00_BotContent_loginSignup_email_address';
     //   this.password = '#ctl00_ctl00_BotContent_loginSignup_txtpassword';
     //   this.signUp = '#ctl00_ctl00_BotContent_loginSignup_BtnReg';
-    //   this.logout = '#ctl00_ctl00_BotContent_hreflogout';
+    //   this.lout = '#ctl00_ctl00_BotContent_hreflogout';
 
   
     // Open the CareerPortal page with the given URL

@@ -1,12 +1,19 @@
-const { Given, When, Then } = require('@cucumber/cucumber')
-const { Login } = require('../page-objects/portal-login-logout/login-logout')
+import { Given, When, Then } from '@cucumber/cucumber';
+import { Login } from '../page-objects/portal-login-logout/login-logout'; // Adjust file extension if needed
+const login = new Login();
 
-const login = new Login()
-
-Given('I can successufully access the propery market portal using {string}', async function (url)  {
-  //open link in tab
-  await login.open(url)
+Given('I can successfully access the property market portal using {string}', async function(url : string) {
+  // Open link in tab
+  await login.open(url);
 });
+
+
+// Given('I can successufully access the propery market portal using {string}', async (url) => {
+//   //login career portal Application
+//   await page.goto(URL);
+// });
+
+
 
 // When('lets login with {string} and {string}', async (username, password) => {
 //   //login career portal Application
