@@ -1,6 +1,6 @@
 Feature: Login to the portal
     Scenario: Property market Portal - Domain.com
-        Given I can successufully access the propery market portal using '<URL>'
+        Given I can successfully access the propery market portal using '<URL>'
         # When I can login using credentails '<username>' and '<password>'
         # Then I can successfully logout
         Examples:

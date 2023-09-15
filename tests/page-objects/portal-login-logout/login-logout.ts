@@ -1,4 +1,4 @@
-import {page} from '../../features/support/hooks'
+import { page } from '../../features/support/hooks'
 export class Login {
 
       // loginButtonSelector = 'button[data-type="login"]';
@@ -10,6 +10,9 @@ export class Login {
   
     // Open the CareerPortal page with the given URL
     async open(URL: string) {
+      
+
+console.log("In page objectc");
       // Navigate to the provided URL
       await page.goto(URL);
     }

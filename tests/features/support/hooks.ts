@@ -1,84 +1,101 @@
 // Import necessary modules
-const { Before, BeforeAll, AfterAll, After, setDefaultTimeout } = require("@cucumber/cucumber");
-const { chromium, waitForTimeout } = require("playwright");
-const path = require("path");
-const fs = require("fs");
-const { Status } = require("@cucumber/cucumber");
+import { BeforeAll, Before, AfterAll, After, Given, When, Then, setDefaultTimeout } from '@cucumber/cucumber';
+import { Browser, BrowserContext, Page, chromium } from 'playwright';
 
-// Set a default timeout for Cucumber steps
-setDefaultTimeout(60000);
+// You can also import other Playwright modules you need.
 
-// Global variables for scenario name and old video path
-// let scenarioName;
-// let oldvideoPath;
+let scenarioName: string | undefined;
+let oldvideoPath: string | undefined;
+
+let browser: Browser | undefined;
+let context: BrowserContext | undefined;
+let page: Page | undefined;
+
+setDefaultTimeout(320000);
 
 // Function to launch the browser
-async function launchBrowser() {
-  global.browser = await chromium.launch({
+BeforeAll(async () => {
+  browser = await chromium.launch({
     headless: false, // Open with browser (false) or without browser (true)
-    slowMo: 1000,    // Slow motion for better visibility
+    slowMo: 900, // Slow motion for better visibility
   });
-}
+});
 
-// Function to create a browser context with video recording
+// // Function to create a browser context with video recording
 // async function createBrowserContextwithRecording() {
-//   global.context = await global.browser.newContext({
+//   context = await browser.newContext({
 //     recordVideo: {
-//       dir: path.join(__dirname, "videos"), // Video recording directory
-//       size: { width: 640, height: 480 },   // Video dimensions
-//     }
+//       dir: path.join(__dirname, 'videos'), // Video recording directory
+//       size: { width: 640, height: 480 }, // Video dimensions
+//     },
 //   });
 //   await createPageContext();
 // }
 
 // Function to create a new page context
 async function createPageContext() {
-  global.page = await global.context.newPage();
+  page = await context.newPage();
 }
 
 // // Function to capture a screenshot
 // async function captureScreenshot() {
-//   const screenshotPath = path.join(__dirname, "screenshots");
+//   const screenshotPath = path.join(__dirname, 'screenshots');
 //   if (!fs.existsSync(screenshotPath)) {
 //     fs.mkdirSync(screenshotPath);
 //   }
-//   const screenshotName = `${scenarioName}_${new Date().toLocaleString().replace(/[/:,]/g, '_')}.png`;
+//   const screenshotName = `${scenarioName}_${new Date()
+//     .toLocaleString()
+//     .replace(/[/:,]/g, '_')}.png`;
 //   console.log('screenshotName: ', screenshotName);
 //   const screenshotFilePath = path.join(screenshotPath, screenshotName);
-//   await global.page.screenshot({ path: screenshotFilePath });
+//   await page.screenshot({ path: screenshotFilePath });
 // }
 
-// Function to close the context
-async function closeContext() {
-  await global.page.close();
-  await global.page.video().delete(); // Delete the recorded video
-  await global.context.close();
-}
-
-// Function to close the browser
-async function closeBrowser() {
-  await global.browser.close();
-}
-
-// Function to rename the captured video
 // async function renamedCapturedVideo() {
 //   try {
-//     await global.page.close();
-//     const newVideoName = `${scenarioName}_${new Date().toLocaleString().replace(/[/:,]/g, '_')}.webm`;
-//     const newVideoPath = path.join(__dirname, "videos", newVideoName);
-//     await new Promise(resolve => setTimeout(resolve, 3000)); // Delay to ensure the video is fully written
-//     await fs.promises.rename(oldvideoPath, newVideoPath);
-//     console.log('File is renamed');
-//   }
-//   catch (error) {
-//     console.error('Error while renaming the video:', error);
+//     await page.close();
+//     const newVideoName = `${scenarioName}_${new Date()
+//       .toLocaleString()
+//       .replace(/[/:,]/g, '_')}.webm`;
+//     const newVideoPath = path.join(__dirname, 'videos', newVideoName);
+
+//     let isVideoWritten = false;
+//     let attemptCount = 0;
+//     const maxAttempts = 10; // Maximum number of attempts
+//     const retryDelay = 5000; // Delay between attempts in milliseconds
+
+ 
+
+//     while (!isVideoWritten && attemptCount < maxAttempts) {
+//       try {
+//         await fs.promises.rename(oldvideoPath, newVideoPath);
+//         isVideoWritten = true;
+//         console.log('File is renamed');
+//       } catch (error) {
+//         console.error(
+//           `Error while renaming the video (attempt ${attemptCount + 1}):` //, error
+//         );
+//         attemptCount++;
+//         await new Promise((resolve) => setTimeout(resolve, retryDelay));
+//       }
+//     }
+
+//     if (!isVideoWritten) {
+//       console.error('Failed to rename the video after multiple attempts.');
+//     }
+//   } catch (error) {
+//     console.error('Error:', error);
 //   }
 // }
 
-// Before All Hook: Launch the browser before all scenarios
-BeforeAll(async () => {
-  await launchBrowser();
-});
+// // Function to close the context
+// async function closeContext() {
+//   await page.close();
+//   await page.video()?.delete(); // Delete the recorded video
+//   await context.close();
+// }
+
+
 
 // Before Hook: Create a new browser context and page before each scenario
 // Before(async (scenario) => {
@@ -88,19 +105,35 @@ BeforeAll(async () => {
 
 // // After Hook: Cleanup and capture a screenshot after each scenario
 // After(async function (scenario) {
-//   oldvideoPath = await global.page.video().path();
-//   if (scenario.result.status === Status.FAILED) {
+//   oldvideoPath = await page.video()?.path();
+//   if (scenario.result?.status === Status.FAILED) {
 //     await captureScreenshot();
 //     console.log('Scenario is failed.');
 //     await renamedCapturedVideo();
-//   }
-//   else {
+//   } else {
 //     await closeContext();
 //     console.log('Your scenario is looking good!.');
 //   }
 // });
 
-// After All Hook: Close the browser after all scenarios
-AfterAll(async function () {
-  await closeBrowser();
+// Function to set up the context and page
+Before(async () => {
+  context = await browser?.newContext();
+  page = await context?.newPage();
 });
+
+// Function to close the browser context after each scenario
+After(async () => {
+  if (context) {
+    await context.close();
+  }
+});
+
+// Function to close the browser after all scenarios
+AfterAll(async () => {
+  if (browser) {
+    await browser.close();
+  }
+});
+
+export { page, browser, context };

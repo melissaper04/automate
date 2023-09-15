@@ -1,9 +1,10 @@
-import { Given, When, Rhen } from '@cucumber/cucumber';
+import { Given, When, Then } from '@cucumber/cucumber';
 import { Login } from '../page-objects/portal-login-logout/login-logout'; // Adjust file extension if needed
 const login = new Login();
 
-Given('I can successfully access the property market portal using {string}', async function(url : string) {
+Given('I can successfully access the propery market portal using {string}', async function(url : string) {
   // Open link in tab
+  console.log("In step file!");
   await login.open(url);
 });
 
