@@ -36,3 +36,4 @@ Run npx -p typescript tsc --init on the command line to generate a tsconfig.json
 npm install
 npx playwright install
 npm install --save-dev cucumber-html-reporter
+npm install cucumber-playwright @cucumber/cucumber chai --save-dev

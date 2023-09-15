@@ -1,4 +1,7 @@
+import assert from 'assert';
 import { page } from '../../features/support/hooks'
+import { expect } from 'chai';
+
 export class Login {
 
       // loginButtonSelector = 'button[data-type="login"]';
@@ -10,11 +13,25 @@ export class Login {
   
     // Open the CareerPortal page with the given URL
     async open(URL: string) {
-      
-
-console.log("In page objectc");
+ 
       // Navigate to the provided URL
       await page.goto(URL);
+         // Get the page title
+    const pageTitle = await page.title();
+
+    // Check if the page title contains the desired keyword
+    const keyword = 'Domain'; // Replace with your desired keyword
+    // assert(pageTitle.includes(keyword), `Page title should contain "${keyword}"`);
+    await expect(pageTitle).to.include(keyword);
+    // await expect(page).toHaveTitle(/Domain/);
+
+    await page.getByTestId('header-button-login').click();
+    await page.getByPlaceholder('Email address').click();
+    await page.getByPlaceholder('Email address').fill('mel@mailinator.com');
+    await page.getByPlaceholder('Password').click();
+    await page.getByPlaceholder('Password').fill('AA12345@');
+    await page.getByRole('button', { name: 'Log in' }).click();
+    
     }
   
 
