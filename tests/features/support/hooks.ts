@@ -1,6 +1,11 @@
 // Import necessary modules
 import { BeforeAll, Before, AfterAll, After, Given, When, Then, setDefaultTimeout } from '@cucumber/cucumber';
 import { Browser, BrowserContext, Page, chromium } from 'playwright';
+import cucumberHtmlReporter from 'cucumber-html-reporter';
+const path = require('path');
+
+
+
 
 // You can also import other Playwright modules you need.
 
@@ -124,16 +129,39 @@ Before(async () => {
 
 // Function to close the browser context after each scenario
 After(async () => {
+
   if (context) {
     await context.close();
   }
-});
-
-// Function to close the browser after all scenarios
-AfterAll(async () => {
   if (browser) {
     await browser.close();
-  }
+  }  
 });
+
+AfterAll(async () => {
+
+  const relativePath = path.relative(process.cwd(), __dirname);
+  console.log('Relative Path:', relativePath);
+  const jsonReportPath = path.resolve(relativePath, 'reports/cucumber-report.json'); // Specify the absolute path to the JSON report
+  const htmlReportPath = path.resolve(relativePath, 'reports/cucumber-report.html'); // Specify the absolute path to the HTML report
+
+  const options = {
+    theme: 'bootstrap',
+    jsonFile: jsonReportPath, // Path to your Cucumber JSON report file
+    output: htmlReportPath,    // Desired name of the HTML report file
+    reportSuiteAsScenarios: true,
+    scenarioTimestamp: true,
+    launchReport: true,
+    metadata: {
+      'App Version': '1.0',
+      'Test Environment': 'Staging',
+      'Browser': 'Chrome 93.0',
+      'Platform': 'Windows 10',
+    },
+  };
+
+  cucumberHtmlReporter.generate(options);
+  // callback(); // Important: Call the callback to signal that the hook is done
+})
 
 export { page, browser, context };

@@ -33,6 +33,6 @@ npm i playwright @cucumber/cucumber typescript ts-node @types/node -D
 Setup TypeScript
 Run npx -p typescript tsc --init on the command line to generate a tsconfig.json. If you've never used npx, then no, it's not a spelling mistake. npx is a command that comes with npm 5.2 onwards that allows you to execute a command from an npm package, without having to install it globally first.
 
- Add the following to the tsconfig.json:
-
-{+  "ts-node": {+    "transpileOnly": true+  },  "compilerOptions": {  }
+npm install
+npx playwright install
+npm install --save-dev cucumber-html-reporter

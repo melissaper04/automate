@@ -1,0 +1,53 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "login-to-the-portal;property-market-portal---domain.com",
+        "keyword": "Scenario",
+        "line": 8,
+        "name": "Property market Portal - Domain.com",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 131221899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "I can successfully access the propery market portal using 'https://www.domain.com.au/'",
+            "match": {
+              "location": "tests\\step-definitions\\login-logout.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7880675199
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 240966500
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "login-to-the-portal",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Login to the portal",
+    "tags": [],
+    "uri": "tests\\features\\login.feature"
+  }
+]
