@@ -1,4 +1,4 @@
-import { Given, When, Then } from '@cucumber/cucumber';
+import { Given, When, Rhen } from '@cucumber/cucumber';
 import { Login } from '../page-objects/portal-login-logout/login-logout'; // Adjust file extension if needed
 const login = new Login();
 

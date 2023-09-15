@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js --require cucumber.js -f json:tests/report/report.json tests/features/login.feature"
+    "test": "cucumber-js --require cucumber.js -f tests/features/login.feature"
     
   
   },
