@@ -30,3 +30,4 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello there ${{ inputs.name }}"
+               cucumber-js --require cucumber.js tests/features/*.feature
