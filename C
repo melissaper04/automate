@@ -4,30 +4,43 @@
     "elements": [
       {
         "description": "",
-        "id": "login-to-the-portal;property-market-portal---domain.com",
+        "id": "job-search-portal;job-seatch-portal---seek.com",
         "keyword": "Scenario",
         "line": 8,
-        "name": "Property market Portal - Domain.com",
+        "name": "Job seatch Portal - seek.com",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 143112400
+              "duration": 148903900
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
             "line": 3,
-            "name": "I can successfully access the propery market portal using 'https://www.domain.com.au/'",
+            "name": "I can successfully access the job search portal using 'https://www.seek.com.au/' using credentails 'mel@mailinator.com' and 'Aa12345@'",
             "match": {
               "location": "tests\\step-definitions\\login-logout.steps.ts:5"
             },
             "result": {
               "status": "passed",
-              "duration": 17705344400
+              "duration": 14639508200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 4,
+            "name": "I can carry out a job search by passing 'Test Lead' keyword",
+            "match": {
+              "location": "tests\\step-definitions\\job-search.steps.ts:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11920540100
             }
           },
           {
@@ -35,7 +48,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 223615499
+              "duration": 182210800
             }
           }
         ],
@@ -43,11 +56,11 @@
         "type": "scenario"
       }
     ],
-    "id": "login-to-the-portal",
+    "id": "job-search-portal",
     "line": 1,
     "keyword": "Feature",
-    "name": "Login to the portal",
+    "name": "Job Search portal",
     "tags": [],
-    "uri": "tests\\features\\login.feature"
+    "uri": "tests\\features\\job-search.feature"
   }
 ]
